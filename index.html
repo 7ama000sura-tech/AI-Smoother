@@ -10,16 +10,17 @@
         body, html { margin: 0; padding: 0; height: 100%; background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, sans-serif; overflow-x: hidden; }
         
         #welcome { position: fixed; inset: 0; background: var(--dark-fade); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2000; text-align: center; }
+        
+        /* ✨ هێڵە شازەکانی QZHA RUSS */
+        .welcome-line { width: 80%; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); box-shadow: 0 0 12px var(--gold); margin: 20px 0; border-radius: 10px; }
+        
         .brand-gold { font-size: 35px; font-weight: 900; letter-spacing: 5px; background: linear-gradient(90deg, var(--gold), #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .welcome-msg { font-size: 16px; color: var(--soft); margin-top: 10px; font-weight: 700; line-height: 1.5; padding: 0 20px; }
+        .welcome-msg { font-size: 16px; color: var(--soft); margin-top: 5px; font-weight: 700; line-height: 1.6; padding: 0 25px; }
         .welcome-btn { margin-top: 30px; padding: 16px 65px; border-radius: 50px; background: none; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; font-weight: 900; }
 
         .main { display: none; padding-bottom: 60px; }
-        .header { padding: 30px 10px 15px; text-align: center; }
         .container { max-width: 390px; margin: 0 auto; padding: 25px; background: #050505; border-radius: 40px; border: 1px solid #151515; text-align: center; }
-
-        .option-card { background: linear-gradient(145deg, #0d0d0d, #050505); border: 1px solid #1a1a1a; padding: 18px; border-radius: 22px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
-        .option-card:hover { border-color: var(--gold); }
+        .option-card { background: linear-gradient(145deg, #0d0d0d, #050505); border: 1px solid #1a1a1a; padding: 18px; border-radius: 22px; margin-bottom: 15px; cursor: pointer; }
         .option-title { font-weight: 900; color: var(--gold); font-size: 17px; display: block; margin-bottom: 4px; }
         .option-desc { font-size: 12px; color: #aaa; font-weight: 700; }
 
@@ -27,25 +28,23 @@
         #percent { font-size: 22px; font-weight: 900; color: var(--gold); margin-bottom: 8px; }
         .progress-container { width: 100%; height: 6px; background: rgba(255,133,162,0.1); border-radius: 10px; margin: 12px 0; overflow: hidden; }
         .progress-bar { height: 100%; width: 0%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
-        #load-txt { font-weight: 800; color: var(--soft); font-size: 13px; min-height: 40px; }
 
         canvas { width: 100%; border-radius: 28px; display: none; margin-top: 20px; border: 1px solid #222; }
         .dl-btn { display: none; margin-top: 20px; background: linear-gradient(45deg, #8b0000, #ff1a1a); color: #fff; padding: 20px; text-decoration: none; font-weight: 900; border-radius: 50px; text-align: center; }
-
-        .tiktok-section { margin-top: 25px; padding: 20px; background: rgba(255, 255, 255, 0.02); border: 1px dashed rgba(255, 133, 162, 0.3); border-radius: 30px; }
-        .tiktok-btn { display: inline-block; padding: 12px 30px; background: #fff; color: #000; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 14px; margin-top: 12px; }
     </style>
 </head>
 <body>
 
     <div id="welcome">
+        <div class="welcome-line"></div>
         <div class="brand-gold">QZHA RUSS</div>
         <div class="welcome-msg">هـەناسەیـەک پـڕ لـە جـوانـی و نـاز.. ✨🌷<br>سـڵاو نـازدارەکـەم، بـەخـێـربـێی بـۆ جـیهـانە پـەمـەییـەکەت 🎀🦢</div>
+        <div class="welcome-line"></div>
         <button class="welcome-btn" onclick="openStudio()">دەسـت پـێ بـکە 📸✨</button>
     </div>
 
     <div class="main" id="main">
-        <header class="header">
+        <header style="padding: 30px 10px 15px; text-align: center;">
             <div class="brand-gold" style="font-size: 26px;">QZHA RUSS</div>
         </header>
 
@@ -58,9 +57,6 @@
                 <span class="option-title">SMART AI FACE 💄✨</span>
                 <span class="option-desc">مکـیاژی سروشـتی، لێوی تـۆخ و خـاڵی ورد 🍓</span>
             </div>
-            <div class="tiktok-section">
-                <a href="https://www.tiktok.com/@qzha.a" target="_blank" class="tiktok-btn">VISIT TIKTOK ⚡🔥</a>
-            </div>
             <input type="file" id="fileIn" style="display:none" accept="image/*">
         </div>
 
@@ -68,7 +64,6 @@
             <div id="loader">
                 <div id="percent">0%</div>
                 <div class="progress-container"><div class="progress-bar" id="p-bar"></div></div>
-                <div id="load-txt">خـەریکی ناسیـنەوەی چـاوە مـەسـتـەکـانـتـم... ✨👁️</div>
             </div>
             <canvas id="canvas-out"></canvas>
             <div id="res-msg" style="margin-top: 20px; font-weight: 900; color: var(--gold);"></div>
@@ -120,15 +115,19 @@
         canvas.width = img.width; canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
 
-        // 🎨 Smart Filter Logic (iPhone vs Android)
+        // 🍎 Ultimate Triple Glow Engine for iPhone
         if(isIphone) {
-            ctx.globalAlpha = 0.5;
-            ctx.filter = 'blur(8px) saturate(1.5) brightness(1.1)';
+            ctx.globalAlpha = 0.6;
+            ctx.filter = 'blur(15px) saturate(1.8) brightness(1.1)'; 
             ctx.drawImage(canvas, 0, 0);
-            ctx.globalAlpha = 0.2; ctx.fillStyle = "#ff85a2"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.globalAlpha = 0.4;
+            ctx.filter = 'blur(5px) brightness(1.2)';
+            ctx.drawImage(canvas, 0, 0);
+
+            ctx.globalAlpha = 0.22; ctx.fillStyle = "#ff85a2"; ctx.fillRect(0, 0, canvas.width, canvas.height);
         } else {
-            ctx.globalAlpha = 0.35;
-            ctx.filter = 'blur(4px) saturate(1.2)';
+            ctx.globalAlpha = 0.35; ctx.filter = 'blur(4px) saturate(1.2)';
             ctx.drawImage(canvas, 0, 0);
             ctx.globalAlpha = 0.1; ctx.fillStyle = "#ffb3c1"; ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
@@ -143,32 +142,30 @@
                     const nose = marks.getNose();
                     const eyeDist = Math.sqrt(Math.pow(marks.getRightEye()[0].x - marks.getLeftEye()[0].x, 2));
 
-                    // 💄 لێوی سروشتی (Soft Edges)
-                    ctx.globalAlpha = 0.6;
-                    ctx.fillStyle = "#c0392b";
-                    ctx.filter = `blur(${eyeDist/25}px)`; // لێوارەکان ساف دەبێت
+                    // 💄 Natural Lips (50% Faded for iPhone)
+                    ctx.globalAlpha = isIphone ? 0.25 : 0.6; 
+                    ctx.fillStyle = "#c0392b"; ctx.filter = `blur(${eyeDist/20}px)`;
                     ctx.beginPath(); marks.getMouth().forEach((p, i) => i==0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y)); ctx.closePath(); ctx.fill();
 
-                    // 🌸 ڕوومەت (Gradient Fade)
-                    ctx.filter = `blur(${eyeDist/3}px)`;
-                    ctx.globalAlpha = 0.25;
-                    const leftGrd = ctx.createRadialGradient(marks.getLeftEye()[0].x, marks.getLeftEye()[0].y + (eyeDist/2), 5, marks.getLeftEye()[0].x, marks.getLeftEye()[0].y + (eyeDist/2), eyeDist/1.5);
-                    leftGrd.addColorStop(0, "#ff4d6d"); leftGrd.addColorStop(1, "transparent");
-                    ctx.fillStyle = leftGrd; ctx.beginPath(); ctx.arc(marks.getLeftEye()[0].x, marks.getLeftEye()[0].y + (eyeDist/2), eyeDist/1.5, 0, Math.PI*2); ctx.fill();
+                    // 🌸 Natural Cheeks (50% Faded for iPhone)
+                    ctx.filter = `blur(${eyeDist/2.5}px)`; 
+                    ctx.globalAlpha = isIphone ? 0.12 : 0.25;
+                    const drawCheek = (x, y) => {
+                        const grd = ctx.createRadialGradient(x, y, 2, x, y, eyeDist/1.4);
+                        grd.addColorStop(0, "#ff4d6d"); grd.addColorStop(1, "transparent");
+                        ctx.fillStyle = grd; ctx.beginPath(); ctx.arc(x, y, eyeDist/1.4, 0, Math.PI*2); ctx.fill();
+                    };
+                    drawCheek(marks.getLeftEye()[0].x, marks.getLeftEye()[0].y + (eyeDist/2));
+                    drawCheek(marks.getRightEye()[0].x, marks.getRightEye()[0].y + (eyeDist/2));
 
-                    const rightGrd = ctx.createRadialGradient(marks.getRightEye()[0].x, marks.getRightEye()[0].y + (eyeDist/2), 5, marks.getRightEye()[0].x, marks.getRightEye()[0].y + (eyeDist/2), eyeDist/1.5);
-                    rightGrd.addColorStop(0, "#ff4d6d"); rightGrd.addColorStop(1, "transparent");
-                    ctx.fillStyle = rightGrd; ctx.beginPath(); ctx.arc(marks.getRightEye()[0].x, marks.getRightEye()[0].y + (eyeDist/2), eyeDist/1.5, 0, Math.PI*2); ctx.fill();
-
-                    // 🟤 خاڵە وردەکان (More Scattered & Smaller)
+                    // 🟤 Freckles (50% Faded for iPhone)
                     ctx.filter = 'none';
-                    for (let i = 0; i < 180; i++) {
+                    for (let i = 0; i < 160; i++) {
                         let x = (nose[0].x - eyeDist) + (Math.random() * eyeDist * 2);
                         let y = (nose[0].y - eyeDist/10) + (Math.random() * eyeDist/1.5);
-                        let size = (eyeDist/110);
-                        ctx.globalAlpha = Math.random() * 0.4 + 0.2;
-                        ctx.fillStyle = "#3d2415";
-                        ctx.beginPath(); ctx.arc(x, y, size, 0, Math.PI*2); ctx.fill();
+                        let size = isIphone ? (eyeDist/160) : (eyeDist/110); 
+                        ctx.globalAlpha = isIphone ? 0.18 : 0.35;
+                        ctx.fillStyle = "#3d2415"; ctx.beginPath(); ctx.arc(x, y, size, 0, Math.PI*2); ctx.fill();
                     }
                 });
             }
